@@ -2,7 +2,7 @@
   "name": "directbooks-playwright-cucumber",
   "version": "1.0.0",
   "scripts": {
-    "test:e2e": "cucumber-js --require-module ts-node/register --require src/**/*.ts features/**/*.feature"
+    "test:e2e": "cucumber-js --require-module ts-node/register --require \"src/**/*.ts\" features/**/*.feature"
   },
   "devDependencies": {
     "@cucumber/cucumber": "^11.0.0",

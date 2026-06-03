@@ -1,14 +1,20 @@
 import { Given, Then, Before, After, setDefaultTimeout } from "@cucumber/cucumber";
-import { chromium, Browser, Page, expect } from "@playwright/test";
+import { chromium, Browser, Page } from "@playwright/test";
+import { CommunityPortalPage } from "../pages/community-portal.page";
+import { DirectBooksPage } from "../pages/directbooks.page";
 
 let browser: Browser;
 let page: Page;
+let directBooksPage: DirectBooksPage;
+let communityPortalPage: CommunityPortalPage;
 
 setDefaultTimeout(30 * 1000);
 
 Before(async () => {
   browser = await chromium.launch({ headless: true });
   page = await browser.newPage();
+  directBooksPage = new DirectBooksPage(page);
+  communityPortalPage = new CommunityPortalPage(page);
 });
 
 After(async () => {
@@ -16,51 +22,49 @@ After(async () => {
 });
 
 Given("I open the DirectBooks homepage", async () => {
-  await page.goto("https://www.directbooks.com/", { waitUntil: "domcontentloaded" });
+  await directBooksPage.openHomePage();
 });
 
 Given("I open the DirectBooks FAQ page", async () => {
-  await page.goto("https://www.directbooks.com/faq", { waitUntil: "domcontentloaded" });
+  await directBooksPage.openFaqPage();
 });
 
 Given("I open the DirectBooks Contact page", async () => {
-  await page.goto("https://www.directbooks.com/contact", { waitUntil: "domcontentloaded" });
+  await directBooksPage.openContactPage();
 });
 
 Given("I open the DirectBooks Community Portal", async () => {
-  await page.goto("https://community.directbooks.com/", { waitUntil: "domcontentloaded" });
+  await communityPortalPage.open();
 });
 
 Then("I should see the main DirectBooks messaging", async () => {
-  await expect(page.getByText(/streamlining primary issuance/i)).toBeVisible();
+  await directBooksPage.expectMainMessaging();
 });
 
 Then("I should see the Join the Platform call to action", async () => {
-  await expect(page.getByText(/join the platform/i).first()).toBeVisible();
+  await directBooksPage.expectJoinPlatformCallToAction();
 });
 
 Then("I should see frequently asked questions", async () => {
-  await expect(page.getByText(/frequently asked questions/i)).toBeVisible();
+  await directBooksPage.expectFrequentlyAskedQuestions();
 });
 
 Then("I should see information about who can use DirectBooks", async () => {
-  await expect(
-    page.getByText(/institutional investors and underwriters involved in the primary issuance/i),
-  ).toBeVisible();
+  await directBooksPage.expectWhoCanUseDirectBooksInformation();
 });
 
 Then("I should see contact information", async () => {
-  await expect(page.getByText(/contact us/i)).toBeVisible();
+  await directBooksPage.expectContactInformation();
 });
 
 Then("I should see client services information", async () => {
-  await expect(page.getByText(/clientservices@directbooks.com/i)).toBeVisible();
+  await directBooksPage.expectClientServicesInformation();
 });
 
 Then("I should see the login form", async () => {
-  await expect(page.getByText(/log in/i)).toBeVisible();
+  await communityPortalPage.expectLoginForm();
 });
 
 Then("I should see the forgot password option", async () => {
-  await expect(page.getByText(/forgot your password/i)).toBeVisible();
+  await communityPortalPage.expectForgotPasswordOption();
 });
