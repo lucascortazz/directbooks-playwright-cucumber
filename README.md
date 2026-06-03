@@ -71,11 +71,11 @@ npm run test:e2e:one -- "Validate Community Portal login page"
 
 **CI** — triggers on every push to `main` and every PR. Runs typecheck only, no E2E.
 
-**Nightly Regression** — runs the full suite (typecheck + E2E tests) nightly at 02:00 America/Sao_Paulo, or manually from GitHub Actions.
+**Nightly E2E** — runs the full suite (typecheck + E2E tests) nightly at 02:00 America/Sao_Paulo, or manually from GitHub Actions.
 
-To run regression tests manually in GitHub:
+To run E2E tests manually in GitHub:
 
 1. Open the repository in GitHub
 2. Go to **Actions**
-3. Select **Nightly Regression**
+3. Select **Nightly E2E**
 4. Click **Run workflow**

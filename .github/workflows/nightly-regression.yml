@@ -1,4 +1,4 @@
-name: Nightly Regression
+name: Nightly E2E
 
 on:
   schedule:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   regression:
-    name: Regression Tests
+    name: E2E Tests
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -31,5 +31,5 @@ jobs:
       - name: Install Playwright browser
         run: npx playwright install --with-deps chromium
 
-      - name: Run regression tests
+      - name: Run E2E tests
         run: npm run test:e2e
