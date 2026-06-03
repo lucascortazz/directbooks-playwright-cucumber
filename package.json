@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "test:e2e": "cucumber-js --require-module ts-node/register --require \"src/**/*.ts\" features/**/*.feature"
+    "test:e2e": "cucumber-js --require-module ts-node/register --require \"src/**/*.ts\" features/**/*.feature",
+    "test:e2e:one": "cucumber-js --require-module ts-node/register --require \"src/**/*.ts\" features/**/*.feature --name"
   },
   "devDependencies": {
     "@cucumber/cucumber": "^11.0.0",

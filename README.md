@@ -37,10 +37,19 @@ Typecheck:
 npm run typecheck
 ```
 
-Run E2E tests:
+Run all E2E tests:
 
 ```bash
 npm run test:e2e
+```
+
+Run a single scenario:
+
+```bash
+npm run test:e2e:one -- "Validate homepage content"
+npm run test:e2e:one -- "Validate FAQ page content"
+npm run test:e2e:one -- "Validate Contact page content"
+npm run test:e2e:one -- "Validate Community Portal login page"
 ```
 
 ## GitHub Actions
