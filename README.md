@@ -2,6 +2,22 @@
 
 End-to-end tests for the DirectBooks public website using Playwright, Cucumber, and TypeScript.
 
+## How Playwright and Cucumber Work Together
+
+Cucumber is the **test runner**. It reads `.feature` files written in Gherkin syntax (`Given/When/Then`) and matches each step to TypeScript step definitions in `src/`. Playwright is used inside those step definitions to control the browser — navigating pages, clicking elements, and asserting UI state.
+
+The `test:e2e` script wires it all up:
+
+```bash
+cucumber-js --require-module ts-node/register --require "src/**/*.ts" features/**/*.feature
+```
+
+- `ts-node/register` — lets Cucumber load TypeScript step files directly
+- `--require "src/**/*.ts"` — loads all step definitions and support code (hooks, world, page objects)
+- `features/**/*.feature` — the Gherkin scenarios to run
+
+`@playwright/test` is **not** the runner here — Cucumber owns that role. Playwright is used purely as a browser automation library inside the steps.
+
 ## Install
 
 ```bash
