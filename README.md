@@ -6,6 +6,10 @@ End-to-end tests for the DirectBooks public website using Playwright, Cucumber, 
 
 Cucumber is the **test runner**. It reads `.feature` files written in Gherkin syntax (`Given/When/Then`) and matches each step to TypeScript step definitions in `src/`. Playwright is used inside those step definitions to control the browser — navigating pages, clicking elements, and asserting UI state.
 
+1. Gherkin describes what to do in plain English.
+2. Cucumber finds the matching step definition for each line.
+3. The step definition calls Playwright to actually do the automated steps.
+
 The `test:e2e` script wires it all up:
 
 ```bash
