@@ -1,4 +1,4 @@
-import { test } from "../src/fixtures/base-test";
+import { test } from "../../support/fixtures/baseTest";
 
 test.describe("Why page", () => {
   test.beforeEach(async ({ whyPage }) => {

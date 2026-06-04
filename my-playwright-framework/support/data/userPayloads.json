@@ -1,0 +1,10 @@
+{
+  "validUser": {
+    "email": "test@directbooks.com",
+    "password": ""
+  },
+  "invalidUser": {
+    "email": "invalid@directbooks.com",
+    "password": "wrongpassword"
+  }
+}

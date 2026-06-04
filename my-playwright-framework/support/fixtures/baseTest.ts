@@ -1,16 +1,16 @@
 import { test as base } from "@playwright/test";
-import { DirectBooksPage } from "../pages/directbooks.page";
-import { CommunityPortalPage } from "../pages/community-portal.page";
-import { WhyPage } from "../pages/why.page";
-import { WhoPage } from "../pages/who.page";
-import { HowPage } from "../pages/how.page";
-import { WhatPage } from "../pages/what.page";
-import { SeniorTeamPage } from "../pages/senior-team.page";
-import { HistoryPage } from "../pages/history.page";
-import { CareersPage } from "../pages/careers.page";
-import { NewsroomPage } from "../pages/newsroom.page";
-import { DemoRequestPage } from "../pages/demo-request.page";
-import { LegalPage } from "../pages/legal.page";
+import { DirectBooksPage } from "../pages/DirectBooksPage";
+import { CommunityPortalPage } from "../pages/CommunityPortalPage";
+import { WhyPage } from "../pages/WhyPage";
+import { WhoPage } from "../pages/WhoPage";
+import { HowPage } from "../pages/HowPage";
+import { WhatPage } from "../pages/WhatPage";
+import { SeniorTeamPage } from "../pages/SeniorTeamPage";
+import { HistoryPage } from "../pages/HistoryPage";
+import { CareersPage } from "../pages/CareersPage";
+import { NewsroomPage } from "../pages/NewsroomPage";
+import { DemoRequestPage } from "../pages/DemoRequestPage";
+import { LegalPage } from "../pages/LegalPage";
 
 type Fixtures = {
   directBooksPage: DirectBooksPage;

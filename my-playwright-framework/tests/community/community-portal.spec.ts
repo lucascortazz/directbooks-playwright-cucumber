@@ -1,4 +1,4 @@
-import { test } from "../src/fixtures/base-test";
+import { test } from "../../support/fixtures/baseTest";
 
 test.describe("Community Portal", () => {
   test.beforeEach(async ({ communityPortalPage }) => {

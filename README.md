@@ -1,103 +1,97 @@
-# DirectBooks Playwright + TypeScript
+# my-playwright-framework
 
-End-to-end tests for the DirectBooks public website using Playwright and TypeScript, running nightly across multiple browsers via GitHub Actions.
+End-to-end test automation for [DirectBooks](https://www.directbooks.com) built with [Playwright](https://playwright.dev) and TypeScript.
 
-## How It Works
+---
 
-Playwright Test is both the **test runner and browser automation library**. Tests are written as `.spec.ts` files organised by page, using the Page Object Model to keep selectors separate from test logic.
+## Project structure
 
 ```
-src/
-├── fixtures/       # Custom base-test extending Playwright with all page objects
-└── pages/          # Page Object Model — selectors and actions per page
-tests/              # Spec files, one per site section
-playwright.config.ts
+my-playwright-framework/
+├── config/
+│   ├── dev.env.json        # Development environment variables
+│   └── qa.env.json         # QA environment variables
+├── support/
+│   ├── data/
+│   │   └── userPayloads.json     # Static test data and JSON mocks
+│   ├── fixtures/
+│   │   └── baseTest.ts           # Custom Playwright fixtures
+│   ├── pages/                    # Page Object Models
+│   │   ├── CareersPage.ts
+│   │   ├── CommunityPortalPage.ts
+│   │   ├── DemoRequestPage.ts
+│   │   ├── DirectBooksPage.ts
+│   │   ├── HistoryPage.ts
+│   │   ├── HowPage.ts
+│   │   ├── LegalPage.ts
+│   │   ├── NewsroomPage.ts
+│   │   ├── SeniorTeamPage.ts
+│   │   ├── WhatPage.ts
+│   │   ├── WhoPage.ts
+│   │   └── WhyPage.ts
+│   └── utils/
+│       ├── apiHelpers.ts         # Reusable API orchestration utilities
+│       └── cryptoUtils.ts        # Encryption/decryption helpers
+├── tests/
+│   ├── about/
+│   ├── community/
+│   ├── contact/
+│   ├── faq/
+│   ├── homepage/
+│   ├── legal/
+│   ├── newsroom/
+│   └── solution/
+├── playwright.config.ts
+├── tsconfig.json
+└── package.json
 ```
 
-A custom base fixture (`src/fixtures/base-test.ts`) extends Playwright's `test` with every page object pre-instantiated. Spec files import from it instead of `@playwright/test`, so there's no manual `new Page(page)` wiring in tests.
+---
 
-Tests run in parallel across three browser engines — Chromium, Firefox, and WebKit — using Playwright's native project support.
+## Prerequisites
 
-## Install
+- [Node.js](https://nodejs.org) v22+
+- npm v10+
+
+---
+
+## Getting started
 
 ```bash
+# Navigate into the framework directory
+cd my-playwright-framework
+
+# Install dependencies
 npm install
+
+# Install Playwright browsers
 npx playwright install --with-deps
 ```
 
-## Run Locally
+---
 
-Typecheck:
+## Running tests
 
-```bash
-npm run typecheck
-```
+| Command | Description |
+|---|---|
+| `npm test` | Run all tests (all browsers) |
+| `npm run test:chromium` | Run tests on Chromium only |
+| `npm run test:firefox` | Run tests on Firefox only |
+| `npm run test:webkit` | Run tests on WebKit only |
+| `npm run test:headed` | Run tests in headed mode |
+| `npm run test:report` | Open the last HTML report |
+| `npm run typecheck` | TypeScript type check (no emit) |
 
-Run all tests across all browsers:
+---
 
-```bash
-npm test
-```
+## Configuration
 
-Run on a single browser:
+Browser projects, timeouts, retries, and reporters are defined in `playwright.config.ts`.
 
-```bash
-npm run test:chromium
-npm run test:firefox
-npm run test:webkit
-```
+Environment-specific variables (base URLs, credentials) live in `config/dev.env.json` and `config/qa.env.json`.
 
-Run in headed mode (watch the browser):
+---
 
-```bash
-npm run test:headed
-```
+## CI/CD
 
-Open the HTML report after a run:
-
-```bash
-npm run test:report
-```
-
-## Project Structure
-
-```
-src/
-├── fixtures/
-│   └── base-test.ts              # Custom fixture — injects all page objects into tests
-└── pages/
-    ├── directbooks.page.ts       # Homepage, FAQ, Contact
-    ├── community-portal.page.ts
-    ├── why.page.ts
-    ├── who.page.ts
-    ├── how.page.ts
-    ├── what.page.ts
-    ├── senior-team.page.ts
-    ├── history.page.ts
-    ├── careers.page.ts
-    ├── newsroom.page.ts
-    ├── demo-request.page.ts
-    └── legal.page.ts             # Terms of Use, Privacy Policy, Cookie Policy
-tests/
-├── homepage.spec.ts              # Hero, messaging, sections, footer
-├── faq.spec.ts                   # FAQ content
-├── contact.spec.ts               # Contact info, phone numbers, emails
-├── solution.spec.ts              # Why, Who, How, What pages
-├── about.spec.ts                 # Senior Team, History, Careers pages
-├── newsroom.spec.ts              # Newsroom and Demo Request pages
-├── legal.spec.ts                 # Terms of Use, Privacy Policy, Cookie Policy
-└── community-portal.spec.ts      # Community Portal login page
-```
-
-## GitHub Actions
-
-**CI** — triggers on every push to `main` and every PR. Runs typecheck only, no E2E.
-
-**Nightly E2E** — runs the full suite nightly at 02:00 America/Sao_Paulo across Chromium, Firefox, and WebKit in parallel. Each browser uploads its own Playwright report artifact. Can also be triggered manually.
-
-To run manually in GitHub:
-
-1. Open the repository in GitHub
-2. Go to **Actions**
-3. Select **Nightly E2E**
-4. Click **Run workflow**
+Tests run automatically via GitHub Actions on a nightly schedule across all three browsers (Chromium, Firefox, WebKit). Playwright HTML reports are uploaded as artifacts and retained for 7 days.
